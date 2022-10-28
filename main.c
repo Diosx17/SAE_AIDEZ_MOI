@@ -13,17 +13,20 @@ int main(int argc, char *argv[])
     FILE *fIn;
     FILE *fIn2;
     FILE *fOut;
-    char repertoire[100];
+    char *repertoire_temporaire;
+    repertoire_temporaire=malloc(350);
     char NomF1[100];
-    char NomF2[100]="";
-    char temp[100];
+    char NomF2[100];
+    char *temp;
+    temp=malloc(350); // Repertoire temporaire servant a stocker le repertoire avant concatenation avec le nom du fichier
     int operation = -1;
-    char double_quote_path[100] = "\x22";
+    char *slash = "/"; // Servira a rajouter un slash a la fin du repertoire pour ensuite concatener le nom du fichier
+    char repertoire[100]=""; //Rajouter des doubles quotes pour ouvrir le dossier
 
 
     if(argv[1])
     {
-        operation = atoi(argv[2])-1; // r�cuperer op�ration si elle est pass�e en argument
+        operation = atoi(argv[2])-1; // recuperer operation si elle est passee en argument
 
     }
 
@@ -32,54 +35,55 @@ int main(int argc, char *argv[])
 
         case 1: // Cas ou il n'y a aucun autre argument que l'executable en lui meme : ouvrir menu texte ou saisir le path du repertoire de travail, numero traitement, nom fichier, nom eventuel 2eme fichier si argv[] = 4
             printf("Rentrez le chemin du repertoire de travail sans antislash a la fin et sans double quote : ");
-            gets(repertoire);
-            printf("\n");
-            strcat(double_quote_path,repertoire);
+            gets(repertoire_temporaire);
 
-            puts(double_quote_path);
+            strcat(repertoire,repertoire_temporaire);
+
+
+            strcat(repertoire,slash);
+            puts(repertoire);
+            printf("\n");
+
             printf("1 : Image en niveaux de gris\n");
             printf("2 : Image en couleurs inversees\n");
             printf("3 : Image monochrome\n");
             printf("4 : Extraction des contours\n");
             printf("5 : Superposition de 2 images\n");
-            printf("Rentrez le num�ro du traitement : ");
+            printf("Rentrez le numero du traitement : ");
             scanf("%d",&operation);
             operation--;
             printf("\n");
             printf("Rentrez le nom du fichier avec extension : ");
             scanf("%s",NomF1);
 
-            printf("\n");
+
+
             if(operation==4) // Si l'operation est la superposition on met demande le nom du fichier
             {
                 printf("Rentrez le nom du 2eme fichier avec extension : ");
                 scanf("%s",NomF2);
-                printf("\n");
+
             }
-            strcpy(temp,double_quote_path);
+            strcpy(temp,repertoire);
+            strcat(repertoire,NomF1);
+            //strcat(repertoire,"\x22");
+            fIn = fopen(repertoire,"rb"); // Pour retrouver sur le repertoire on le concatene avec le nom du fichier pour le trouver
+            puts(repertoire);
 
-            strcat(double_quote_path,"/");
 
-            strcat(double_quote_path,NomF1);
-
-            strcat(double_quote_path,"\x22");
-            fIn = fopen(double_quote_path,"rb"); // Pour retrouver sur le repertoire on le concatene avec le nom du fichier pour le trouver
-            puts(double_quote_path);
             if(NomF2!=NULL)
             {
-                strcpy(double_quote_path,temp);
-                strcat(double_quote_path,"/\x22");
-                fIn2 = fopen(strcat(double_quote_path,NomF2),"rb"); // Meme chose qu'en haut
+                strcpy(repertoire,temp);
+                strcat(repertoire,NomF2);
+                fIn2 = fopen(repertoire,"rb"); // Meme chose qu'en haut
             }
-            strcpy(double_quote_path,temp);
+            strcpy(repertoire,temp);
+            strcat(repertoire,"result.bmp");
+            //strcat(repertoire,"\x22");
 
-            puts(double_quote_path);
-            strcat(double_quote_path,"/");
-            strcat(double_quote_path,"result.bmp");
-            puts(double_quote_path);
-            strcat(double_quote_path,"\x22");
-            fOut = fopen(double_quote_path,"wb"); // Meme chose mais avec fichier resultat
-            puts(double_quote_path);
+
+            fOut = fopen(repertoire,"wb"); // Meme chose mais avec fichier resultat
+            puts(repertoire);
             printf("Fin : %d\n",!fIn);
             printf("FOut : %d\n",!fOut);
             switch(operation) //  On check l'operation en question
@@ -87,8 +91,8 @@ int main(int argc, char *argv[])
                     case 0: // Niveau de gris
                         if (!fIn || !fOut)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         GrayScale(fIn,fOut);
                         break;
@@ -96,8 +100,8 @@ int main(int argc, char *argv[])
                     case 1: // Inversion des couleurs
                         if (!fIn || !fOut)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         Invert(fIn,fOut);
                         break;
@@ -105,8 +109,8 @@ int main(int argc, char *argv[])
                     case 2: // Image monochrome
                         if (!fIn || !fOut)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         Mono(fIn,fOut);
                         break;
@@ -114,8 +118,8 @@ int main(int argc, char *argv[])
                     case 3: // Contours de l'image
                         if (!fIn || !fOut)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         Contours(fIn,fOut);
                         break;
@@ -125,8 +129,8 @@ int main(int argc, char *argv[])
                     case 4: // Superposition des deux images
                         if (!fIn || !fOut || !fIn2)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         Superposition(fIn,fIn2,fOut);
                         break;
@@ -141,20 +145,20 @@ int main(int argc, char *argv[])
                 {
                     case 0: // Niveaux de gris
                         strcpy(temp,argv[1]); // On stocke le path du dossier dans temp
-
+                        strcat(temp,slash);
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
                         fOut = fopen(strcat(argv[1],"result.bmp"), "wb");
                         if (!fIn || !fOut)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         GrayScale(fIn,fOut);
                         break;
 
                     case 1: // Inversion des couleurs
                         strcpy(temp,argv[1]);
-
+                        strcat(temp,slash);
 
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
 
@@ -162,37 +166,37 @@ int main(int argc, char *argv[])
                         fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
                         if (!fIn || !fOut)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         Invert(fIn,fOut);
                         break;
 
                     case 2: // Image monochrome
                         strcpy(temp,argv[1]);
-
+                        strcat(temp,slash);
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
 
                         fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
                         if (!fIn || !fOut)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         Mono(fIn,fOut);
                         break;
 
                     case 3: // Contours de l'image
                         strcpy(temp,argv[1]);
-
+                        strcat(temp,slash);
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
 
 
                         fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
                         if (!fIn || !fOut)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         Contours(fIn,fOut);
                         break;
@@ -200,7 +204,7 @@ int main(int argc, char *argv[])
 
                     case 4: // Superpostion des deux images
                         strcpy(temp,argv[1]);
-
+                        strcat(temp,slash);
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
                         strcpy(temp,argv[1]);
 
@@ -210,8 +214,8 @@ int main(int argc, char *argv[])
                         fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
                         if (!fIn || !fOut || !fIn2)
                             {
-                                printf("File error.\n");
-                                return 0;
+                                printf("Erreur de fichier\n");
+                                return -2;
                             }
                         Superposition(fIn,fIn2,fOut);
                         break;
@@ -227,7 +231,7 @@ int main(int argc, char *argv[])
             {
                 case 4:
                     strcpy(temp,argv[1]);
-
+                    strcat(temp,slash);
                     fIn  = fopen(strcat(temp,argv[3]), "rb");
                     strcpy(temp,argv[1]);
 
@@ -237,8 +241,8 @@ int main(int argc, char *argv[])
                     fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
                     if (!fIn || !fOut || !fIn2)
                         {
-                            printf("File error.\n");
-                            return 0;
+                            printf("Erreur de fichier\n");
+                            return -2;
                         }
                     Superposition(fIn,fIn2,fOut);
                     break;
@@ -254,6 +258,8 @@ int main(int argc, char *argv[])
 
     }
 
+    fclose(fIn);
+    fclose(fOut);
 }
 
 void GrayScale(FILE *fIn, FILE *fOut)
@@ -412,4 +418,3 @@ void Superposition(FILE *fIn, FILE *fIn2, FILE *fOut)
         fwrite(pixel, padding, 1, fOut);
     }
 }
-
