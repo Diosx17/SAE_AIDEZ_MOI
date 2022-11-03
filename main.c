@@ -10,19 +10,16 @@ void Superposition(FILE *, FILE *, FILE *);
 
 int main(int argc, char *argv[])
 {
-    FILE *fIn;
-    FILE *fIn2;
-    FILE *fOut;
-    char *repertoire_temporaire;
-    repertoire_temporaire=malloc(350);
-    char NomF1[100];
-    char NomF2[100];
-    char *temp;
-    temp=malloc(350); // Repertoire temporaire servant a stocker le repertoire avant concatenation avec le nom du fichier
-    int operation = -1;
+    FILE *fIn; // fichier d'entrée déclaré avec type FILE
+    FILE *fIn2; // fichier d'entrée 2 délcaré avec type FILE
+    FILE *fOut; // fichier de sortie déclaré avec type FILE
+    char *repertoire_temporaire = malloc(350); // chaine de caractère stockant le repertoire du fichier source rentré par l'utilisateur
+    char NomF1[100]; // nom du fichier source 1
+    char NomF2[100]; // nom du fichier source 2
+    char *temp = malloc(350); // Repertoire temporaire servant a stocker le repertoire avant concatenation avec le nom du fichier
+    int operation = -1; // numéro de l'opération à effectuer (init à -1)
     char *slash = "/"; // Servira a rajouter un slash a la fin du repertoire pour ensuite concatener le nom du fichier
     char repertoire[100]=""; //Rajouter des doubles quotes pour ouvrir le dossier
-
 
     if(argv[1])
     {
@@ -30,42 +27,39 @@ int main(int argc, char *argv[])
 
     }
 
-    switch (argc) // On teste le nombre d'arguments rentr�s pendant l'execution
+    switch (argc) // On teste le nombre d'arguments rentrés pendant l'execution
     {
 
         case 1: // Cas ou il n'y a aucun autre argument que l'executable en lui meme : ouvrir menu texte ou saisir le path du repertoire de travail, numero traitement, nom fichier, nom eventuel 2eme fichier si argv[] = 4
             printf("Rentrez le chemin du repertoire de travail sans antislash a la fin et sans double quote : ");
-            gets(repertoire_temporaire);
+            gets(repertoire_temporaire); // récupération du repertoire
 
-            strcat(repertoire,repertoire_temporaire);
+            strcat(repertoire,repertoire_temporaire); // concaténation du repertoire avec des doubles quotes
 
 
-            strcat(repertoire,slash);
-            puts(repertoire);
-            printf("\n");
+            strcat(repertoire,slash); // concaténation d'un slash a la fin du repertoire pour obtenir le path complet
 
-            printf("1 : Image en niveaux de gris\n");
+            printf("1 : Image en niveaux de gris\n");        // affichage des différentes opérations
             printf("2 : Image en couleurs inversees\n");
             printf("3 : Image monochrome\n");
             printf("4 : Extraction des contours\n");
             printf("5 : Superposition de 2 images\n");
             printf("Rentrez le numero du traitement : ");
-            scanf("%d",&operation);
-            operation--;
+            scanf("%d",&operation); // récupération du numéro de l'opération
+            operation--; // opération -1 car nous faisons notre switch case plus bas avec des valeurs allant de 0 à 4 (l'utilisateur en entrant une de 1 à 5)
             printf("\n");
             printf("Rentrez le nom du fichier avec extension : ");
-            scanf("%s",NomF1);
-
+            scanf("%s",NomF1); // récupération nom fichier 1
 
 
             if(operation==4) // Si l'operation est la superposition on met demande le nom du fichier
             {
                 printf("Rentrez le nom du 2eme fichier avec extension : ");
-                scanf("%s",NomF2);
+                scanf("%s",NomF2); // récupération nom fichier 2
 
             }
-            strcpy(temp,repertoire);
-            strcat(repertoire,NomF1);
+            strcpy(temp,repertoire); // copie du path dans une autre chaine de caractere vierge car nous voulons le réutiliser apres la premiere concatenation avec le nom
+            strcat(repertoire,NomF1); // concatener path avec nom fichier 1
             //strcat(repertoire,"\x22");
             fIn = fopen(repertoire,"rb"); // Pour retrouver sur le repertoire on le concatene avec le nom du fichier pour le trouver
             puts(repertoire);
@@ -73,12 +67,12 @@ int main(int argc, char *argv[])
 
             if(NomF2!=NULL)
             {
-                strcpy(repertoire,temp);
-                strcat(repertoire,NomF2);
+                strcpy(repertoire,temp); // copie du path dans une autre chaine de caractere vierge car nous voulons le réutiliser apres la premiere concatenation avec le nom
+                strcat(repertoire,NomF2);// concatener path avec nom fichier 2
                 fIn2 = fopen(repertoire,"rb"); // Meme chose qu'en haut
             }
-            strcpy(repertoire,temp);
-            strcat(repertoire,"result.bmp");
+            strcpy(repertoire,temp); // remettre à la chaine repetertoire le path
+            strcat(repertoire,"result.bmp"); // concatener
             //strcat(repertoire,"\x22");
 
 
@@ -89,37 +83,57 @@ int main(int argc, char *argv[])
             switch(operation) //  On check l'operation en question
                 {
                     case 0: // Niveau de gris
-                        if (!fIn || !fOut)
+                        if (!fIn)
                             {
-                                printf("Erreur de fichier\n");
+                                printf("Erreur, fichier source non trouv%c\n",130);
                                 return -2;
+                            }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
                             }
                         GrayScale(fIn,fOut);
                         break;
 
                     case 1: // Inversion des couleurs
-                        if (!fIn || !fOut)
+                        if (!fIn)
                             {
-                                printf("Erreur de fichier\n");
+                                printf("Erreur, fichier source non trouv%c\n",130);
                                 return -2;
+                            }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
                             }
                         Invert(fIn,fOut);
                         break;
 
                     case 2: // Image monochrome
-                        if (!fIn || !fOut)
+                        if (!fIn)
                             {
-                                printf("Erreur de fichier\n");
+                                printf("Erreur, fichier source non trouv%c\n",130);
                                 return -2;
+                            }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
                             }
                         Mono(fIn,fOut);
                         break;
 
                     case 3: // Contours de l'image
-                        if (!fIn || !fOut)
+                        if (!fIn)
                             {
-                                printf("Erreur de fichier\n");
+                                printf("Erreur, fichier source non trouv%c\n",130);
                                 return -2;
+                            }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
                             }
                         Contours(fIn,fOut);
                         break;
@@ -127,20 +141,32 @@ int main(int argc, char *argv[])
 
 
                     case 4: // Superposition des deux images
-                        if (!fIn || !fOut || !fIn2)
+                        if (!fIn || !fIn2)
                             {
-                                printf("Erreur de fichier\n");
+                                printf("Erreur, fichier(s) source(s) non trouv%c(s)\n",130);
                                 return -2;
+                            }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
                             }
                         Superposition(fIn,fIn2,fOut);
                         break;
 
                     default:
+                        printf("Le traitement demand%c est impossible ou n'existe pas\n",130);
                         return -1; //Le traitement n'existe pas
                 }
             break;
 
         case 4: // Cas 2 ou on met les arguments directement dans la fonction (toutes operation sauf superposition)
+
+            if(!argv[3]||!argv[4])
+            {
+                printf("Fichier(s) n'existe(nt) pas\n");
+                return -2;
+            }
             switch(operation)
                 {
                     case 0: // Niveaux de gris
@@ -148,10 +174,15 @@ int main(int argc, char *argv[])
                         strcat(temp,slash);
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
                         fOut = fopen(strcat(argv[1],"result.bmp"), "wb");
-                        if (!fIn || !fOut)
+                        if (!fIn)
                             {
-                                printf("Erreur de fichier\n");
+                                 printf("Erreur, fichier source non trouv%c\n",130);
                                 return -2;
+                            }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
                             }
                         GrayScale(fIn,fOut);
                         break;
@@ -163,11 +194,16 @@ int main(int argc, char *argv[])
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
 
 
-                        fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
-                        if (!fIn || !fOut)
+                        fOut = fopen(strcat(argv[1],"/result.bmp"), "wb");
+                        if (!fIn)
                             {
-                                printf("Erreur de fichier\n");
+                                 printf("Erreur, fichier source non trouv%c\n",130);
                                 return -2;
+                            }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
                             }
                         Invert(fIn,fOut);
                         break;
@@ -177,11 +213,16 @@ int main(int argc, char *argv[])
                         strcat(temp,slash);
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
 
-                        fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
-                        if (!fIn || !fOut)
+                        fOut = fopen(strcat(argv[1],"/result.bmp"), "wb");
+                        if (!fIn)
                             {
-                                printf("Erreur de fichier\n");
+                                 printf("Erreur, fichier source non trouv%c\n",130);
                                 return -2;
+                            }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
                             }
                         Mono(fIn,fOut);
                         break;
@@ -192,56 +233,96 @@ int main(int argc, char *argv[])
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
 
 
-                        fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
-                        if (!fIn || !fOut)
+                        fOut = fopen(strcat(argv[1],"/result.bmp"), "wb");
+                        if (!fIn)
                             {
-                                printf("Erreur de fichier\n");
+                                 printf("Erreur, fichier source non trouv%c\n",130);
                                 return -2;
+                            }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
                             }
                         Contours(fIn,fOut);
                         break;
 
 
                     case 4: // Superpostion des deux images
+
                         strcpy(temp,argv[1]);
                         strcat(temp,slash);
                         fIn  = fopen(strcat(temp,argv[3]), "rb");
-                        strcpy(temp,argv[1]);
 
-                        fIn2 = fopen(strcat(temp,argv[4]),"rb");
                         strcpy(temp,argv[1]);
+                        strcat(temp,slash);
+                        if(argv[4])
+                        {
+                            fIn2 = fopen(strcat(temp,argv[4]),"rb");
 
-                        fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
-                        if (!fIn || !fOut || !fIn2)
+                        }
+                        else
+                        {
+                            printf("le fichier 2 n'existe pas \n");
+                            return -2;
+                        }
+
+
+                        strcpy(temp,argv[1]);
+                        strcat(temp,slash);
+
+                        fOut = fopen(strcat(argv[1],"/result.bmp"), "wb");
+                        if (!fIn || !fIn2)
                             {
-                                printf("Erreur de fichier\n");
+                                printf("Erreur, fichier(s) source(s) non trouv%c(s)\n",130);
                                 return -2;
                             }
+                        else if (!fOut)
+                            {
+                                printf("Erreur, impossible de cr%cer le fichier de sortie\n",130);
+                                return -3;
+                            }
+                        printf("%d fIn\n",!fIn);
+                        printf("%d fIn2\n",!fIn2);
+                        printf("%d fOut\n",!fOut);
+
                         Superposition(fIn,fIn2,fOut);
                         break;
 
 
                     default:
+                        printf("Le traitement demand%c est impossible ou n'existe pas\n",130);
                         return -1; //Le traitement n'existe pas
                 }
                 break;
 
         case 5: // Cas 3 ou on met les arguments directement dans la fonction donc superposition
+            if(!argv[3] || !argv[4])
+            {
+                printf("Fichier(s) n'existe(nt) pas\n");
+                return -2;
+            }
             switch(operation)
             {
                 case 4:
                     strcpy(temp,argv[1]);
                     strcat(temp,slash);
+
                     fIn  = fopen(strcat(temp,argv[3]), "rb");
                     strcpy(temp,argv[1]);
+                    strcat(temp,slash);
 
                     fIn2 = fopen(strcat(temp,argv[4]),"rb");
+                    printf("%s\n",strcat(temp,argv[4]));
                     strcpy(temp,argv[1]);
+                    strcat(temp,slash);
 
-                    fOut = fopen(strcat(argv[1],"\\result.bmp"), "wb");
-                    if (!fIn || !fOut || !fIn2)
+                    fOut = fopen(strcat(argv[1],"/result.bmp"), "wb");
+                    printf("%d fIn\n",!fIn);
+                    printf("%d fIn2\n",!fIn2);
+                    if (!fIn || !fIn2)
                         {
-                            printf("Erreur de fichier\n");
+                            printf("Erreur, fichier(s) source(s) non trouv%c(s)\n",130);
                             return -2;
                         }
                     Superposition(fIn,fIn2,fOut);
@@ -249,6 +330,7 @@ int main(int argc, char *argv[])
 
 
                 default:
+                    printf("Le traitement demand%c est impossible ou n'existe pas\n",130);
                     return -1; //Le traitement n'existe pas
                 break;
             }
@@ -257,9 +339,10 @@ int main(int argc, char *argv[])
 
 
     }
-
+    printf("Traitement effectu%c",130);
     fclose(fIn);
     fclose(fOut);
+    return 0; // Le traitement s'est bien déroulé
 }
 
 void GrayScale(FILE *fIn, FILE *fOut)
