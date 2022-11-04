@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
             strcat(repertoire,slash); // concaténation d'un slash a la fin du repertoire pour obtenir le path complet
 
             printf("1 : Image en niveaux de gris\n");        // affichage des différentes opérations
-            printf("2 : Image en couleurs inversees\n");
+            printf("2 : Image en couleurs inversees\n"); 
             printf("3 : Image monochrome\n");
             printf("4 : Extraction des contours\n");
             printf("5 : Superposition de 2 images\n");
@@ -351,8 +351,8 @@ void GrayScale(FILE *fIn, FILE *fOut)
     fread(header, sizeof(unsigned char), 54, fIn); // Lecture de l'header sur l'image ouvertre
     fwrite(header, sizeof(unsigned char), 54, fOut); // Ecriture de l'header sur l'image resultat
 
-    int width = *(int*)&header[18]; // La longueur de l'image calcul�e par
-    int height = abs(*(int*)&header[22]); // La hauteut de l'image calcul�e par
+    int width = *(int*)&header[18]; // La longueur de l'image se trouvant a cet élément du tableau header
+    int height = abs(*(int*)&header[22]); // La hauteut de l'image se trouvant a cet élément du tableau header
     int stride = (width * 3 + 3) & ~3;
     int padding = stride - width * 3;
 
