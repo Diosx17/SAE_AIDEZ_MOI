@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     switch(argc){
         //Executable
         case 1:
-            demandes_lineaire(repertoire, &operation, NomF1, NomF2);
+            errorValue = demandes_lineaire(repertoire, &operation, NomF1, NomF2);
             errorValue = commandes(repertoire, &operation, NomF1, NomF2);
             break;
         //PRECEDENT + premier fichier bmp
