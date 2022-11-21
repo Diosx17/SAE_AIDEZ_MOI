@@ -38,8 +38,12 @@ int main(int argc, char *argv[])
                 strcpy(NomF2, argv[4]);
                 NomF2 = strcat(NomF2, ".bmp");
                 errorValue = commandes(repertoire, &operation, NomF1, NomF2);
-                break;
             }
+            else{
+                printf("L'operation demandée ne convient pas au mode d'entrée")
+                errorValue = -1;
+            }
+            break;
         //RIEN TROUVE
         default : printf("Traitement impossible\n");
                   errorValue = -1;
@@ -140,7 +144,7 @@ int commandes(char * repertoire, int * operation, char* NomF1, char* NomF2){
                         break;
             }
         }else{
-            printf("Le fichier de résultat ne peut etre créé\n");
+            printf("Le fichier result.bmp ne peut etre écrit\n");
             return -3;
         }
 
