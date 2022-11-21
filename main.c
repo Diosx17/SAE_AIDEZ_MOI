@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
                 errorValue = commandes(repertoire, &operation, NomF1, NomF2);
             }
             else{
-                printf("L'operation demandée ne convient pas au mode d'entrée");
+                printf("L'operation demand%ce ne convient pas au mode d'entr%ce\n",130,130);
                 errorValue = -1;
             }
             break;
@@ -134,10 +134,15 @@ int commandes(char * repertoire, int * operation, char* NomF1, char* NomF2){
                 case 4: Contours(fIn1, fOut);
                         return 0;
                         break;
-                case 5: if(NomF2){
+                case 5: if(fIn2){
                             Superposition(fIn1, fIn2, fOut);
                             return 0;
                             break;
+                        }
+                        else
+                        {
+                             printf("Un (ou plusieurs) fichier(s) n'existe(nt) pas\n");
+                            return -2;
                         }
                 default:printf("Traitement impossible\n");
                         return -1;

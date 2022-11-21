@@ -39,3 +39,14 @@
 1669054772 source:c:\users\nv062\desktop\sae_aidez_moi\main.c
 	"fonctionImage.h"
 
+1669055109 source:c:\ti\sae_aidez_moi\fonctionimage.c
+	"fonctionImage.h"
+
+1669055109 c:\ti\sae_aidez_moi\fonctionimage.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1669069095 source:c:\ti\sae_aidez_moi\main.c
+	"fonctionImage.h"
+
