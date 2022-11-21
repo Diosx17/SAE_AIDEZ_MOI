@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
                 errorValue = commandes(repertoire, &operation, NomF1, NomF2);
             }
             else{
-                printf("L'operation demandée ne convient pas au mode d'entrée")
+                printf("L'operation demandée ne convient pas au mode d'entrée");
                 errorValue = -1;
             }
             break;
