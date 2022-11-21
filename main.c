@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
         //Executable
         case 1:
             demandes_lineaire(repertoire, &operation, NomF1, NomF2);
-            commandes(repertoire, &operation, NomF1, NomF2);
+            errorValue = commandes(repertoire, &operation, NomF1, NomF2);
             break;
         //PRECEDENT + premier fichier bmp
         case 4:
@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
     free(repertoire);
     free(NomF1);
     free(NomF2);
+
     if(errorValue){
         printf("erreur type : %d", errorValue);
     }
@@ -138,16 +139,13 @@ int commandes(char * repertoire, int * operation, char* NomF1, char* NomF2){
                         return -1;
                         break;
             }
-        }
-        else{
+        }else{
             printf("Le fichier de résultat ne peut etre créé\n");
             return -3;
         }
 
-    }
-    else{
+    }else{
         printf("Un (ou plusieurs) fichier(s) n'existe(nt) pas\n");
         return -2;
     }
-
 }
