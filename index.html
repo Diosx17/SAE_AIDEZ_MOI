@@ -1,0 +1,107 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/form.css">
+        <link rel="stylesheet" href="css/formContent.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+        
+        <title>SAE Image</title>
+    </head>
+
+    <body>
+        <header>
+            <img src="img/tech.gif" alt="logo_gif">
+            <div>
+                <h1>IMAGIE</h1>
+                <h2>Conversion d'images</h2>
+            </div>
+        </header>
+
+        <main>
+            <h2>Choisissez, envoyez, récupérez</h2>
+
+            <!-- Fichier 1 -->
+            <p>Choisir une image</p>
+            <input type="file" accept=".bmp" name="fichier1" form="formulaire">
+
+            <fieldset>
+                <legend>FAITES VOTRE CHOIX</legend>
+                <form action="http://localhost:8888/index.py" method="post" id="formulaire">
+                    <p>Cliquez sur les options souhaitez</p>
+
+                        <!-- Choix 1 : gris -->
+                        <div class="choix">
+                            <div>
+                                <input type="checkbox" value="ok" id="gris" name="gris">
+                                <label for="gris">Passer en niveaux de gris</label>
+                            </div>
+
+                            <a class="aide" aria-label="Permet de renvoyer une image en nuances de gris">aide</a>
+                        </div>
+
+                        <!-- Choix 2 : inversion -->
+                        <div class="choix">
+                            <div>
+                                <input type="checkbox" value="ok" id="inversion" name="inversion">
+                                <label for="inversion">Inverser les couleurs</label>
+                            </div>
+
+                            <a class="aide" aria-label="Permet de renvoyer une image en négatif">aide</a>
+                        </div>
+
+                        <!-- Choix 3 : monochrome -->
+                        <div class="choix">
+                            <div>
+                                <input type="checkbox" value="ok" id="monochrome" name="monochrome">
+                                <label for="monochrome">Transformer en image monochrome</label>
+                            </div>
+
+                            <a class="aide" aria-label="Permet de renvoyer une image en une seule couleur"><span>aide</span></a>
+                        </div>
+
+                        <!-- Choix 4 : contour -->
+                        <div class="choix">
+                            <div>
+                                <input type="checkbox" value="ok" id="contour" name="contour">
+                                <label for="contour">Extraire les contours</label>
+                            </div>
+
+                            <a class="aide" aria-label="Permet de renvoyer une image qu'avec les contours">aide</a>
+                        </div>
+
+                        <!-- Choix 5 : Fusion -->
+                        <div class="Superposer">
+                        
+                            <a class="aide" aria-label="Permet de superposer 2 images l'une sur l'autre">aide</a>
+                            <input type="checkbox" value="ok" id="fusion" name="fusion">
+                            <label for="fusion">Superposer 2 images</label>
+
+                            <!-- Fichier 2 -->
+                            <p class="file">Choisir une seconde image</p>
+                            <input type="file" name="fichier2" class="file" accept=".bmp">
+                        </div>
+
+                    <input type="submit" value="Traiter l'image">
+                </form>
+            </fieldset>
+
+            <!-- LOG -->
+        </main>
+
+        <footer>
+            <p><a href="">Contactez-nous</a> | <a href="">A propos</a> | <a href="">CGU</a></p>
+        </footer>
+    </body>
+</html>

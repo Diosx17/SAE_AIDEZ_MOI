@@ -1,0 +1,135 @@
+/* On met en forme les labels et les inputs */
+
+ .choix, input, .Superposer{
+    position: relative;
+    margin-bottom: 10px;
+
+    background-color: rgb(16, 15, 124);
+    border-radius: 25px;
+    border: 1px solid rgb(4, 0, 255);
+}
+
+.choix, input, label{
+    cursor: pointer;
+}
+
+.Superposer, .choix, input{
+    padding-left: 10px;
+}
+
+.choix{
+    display: flex;
+    justify-content: space-between;
+
+    height: 20px;
+}
+
+label{
+    margin-left: 10px;
+}
+
+input[type="checkbox"]{
+    visibility: hidden; /* On cache les checkbox */
+}
+
+/* Permet de cacher le
+ * deuxième input file
+ * par défaut
+ */
+
+#fusion:not(:checked) ~ .file{
+    display: none;
+}
+
+/* Pour que la checkbox et le label soit sur la même ligne */
+
+.Superposer{
+    position: relative;
+    display: inline;
+    text-align: start;
+
+    background-color: rgb(16, 15, 124);
+    cursor: pointer;
+}
+
+/* Permet de montrer le deuxième input file après avoir coché l'outil "Superposer" */
+
+#fusion:checked ~ .file{
+    display: block;
+
+    animation: fileTransition 0.3s;
+}
+
+input[type="checkbox"]:checked ~ label{
+    color: rgb(218, 218, 218);
+    font-weight: 500;
+}
+
+.aide{
+    position: absolute;
+    right:0;
+
+    height: auto;
+    margin-right: 15px;
+
+    color: rgb(74, 72, 219);
+}
+
+/* Permet de créer une info-bulle stylisée */
+
+.aide:hover:after,
+.aide:focus:after {
+    content: attr(aria-label);  /* on affiche aria-label */
+
+    position: absolute;
+    top: -2.4em;
+    left: 50%;
+    padding: 5px 14px;
+    z-index: 1; /* pour s'afficher au dessus des éléments en position relative */
+
+    transform: translateX(-50%); /* on centre horizontalement  */
+    white-space: nowrap;  /* on interdit le retour à la ligne avec les espaces*/
+    background: #001cb9;
+    color: #fff;
+    border-radius: 4px;
+}
+
+[aria-label]:hover:before{
+    content: "▼"; /* Pour afficher une fleche */
+
+    position: absolute;
+    top: -1em;
+	left: 50%;
+
+	transform: translateX(-50%);
+    font-size: 25px;
+    color: #0d00be;
+}
+
+/* On met en forme les inputs de type file */
+
+input[type="file"]{
+    height: 30px;
+    width: 100%;
+    padding: 2px 0px 0px 15px;
+    margin-left: -10px;
+
+    box-sizing: border-box;
+}
+
+/* On met en forme le bouton d'envoie. Aussi bien l'apparence par défaut que l'apparence au survol */
+
+input[type="submit"]{
+    width: 250px;
+    height: 50px;
+    margin-top: 50px;
+    border: none;
+    align-self: center;
+    color: grey;
+    font-family: 'Oswald', sans-serif;
+}
+
+input[type="submit"]:hover{
+    cursor: pointer;
+    background-color: rgb(27, 24, 182);
+}

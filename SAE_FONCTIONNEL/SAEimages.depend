@@ -1,0 +1,104 @@
+# depslib dependency file v1.0
+1666966431 source:c:\users\pt202627\onedrive - université nice sophia antipolis\documents\saemarchepitite\saeimages\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1667509057 source:d:\users\thomas\desktop\final\sae_aidez_moi\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1669048234 source:c:\users\vn201042\onedrive - université nice sophia antipolis\bureau\sae_c\sae_aidez_moi\main.c
+	"fonctionImage.h"
+
+1667896100 source:c:\users\vn201042\onedrive - université nice sophia antipolis\bureau\sae_c\sae_aidez_moi\header.c
+	"header.h"
+
+1667896164 c:\users\vn201042\onedrive - université nice sophia antipolis\bureau\sae_c\sae_aidez_moi\header.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1669026234 source:c:\users\vn201042\onedrive - université nice sophia antipolis\bureau\sae_c\sae_aidez_moi\fonctionimage.c
+	"fonctionImage.h"
+
+1669041406 c:\users\vn201042\onedrive - université nice sophia antipolis\bureau\sae_c\sae_aidez_moi\fonctionimage.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1669052768 source:c:\users\nv062\desktop\sae_aidez_moi\fonctionimage.c
+	"fonctionImage.h"
+
+1669053053 c:\users\nv062\desktop\sae_aidez_moi\fonctionimage.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1669054772 source:c:\users\nv062\desktop\sae_aidez_moi\main.c
+	"fonctionImage.h"
+
+1669055109 source:c:\ti\sae_aidez_moi\fonctionimage.c
+	"fonctionImage.h"
+
+1669055109 c:\ti\sae_aidez_moi\fonctionimage.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1669069095 source:c:\ti\sae_aidez_moi\main.c
+	"fonctionImage.h"
+
+1669800242 source:c:\users\vn201042\onedrive - université nice sophia antipolis\bureau\sae_c_html\sae_fonctionnel\fonctionimage.c
+	"fonctionImage.h"
+
+1669118839 c:\users\vn201042\onedrive - université nice sophia antipolis\bureau\sae_c_html\sae_fonctionnel\fonctionimage.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1669801750 source:c:\users\vn201042\onedrive - université nice sophia antipolis\bureau\sae_c_html\sae_fonctionnel\main.c
+	"fonctionImage.h"
+
+1670092177 source:c:\data\c\sae_fonctionnel\main.c
+	"fonctionImage.h"
+
+1670091355 c:\data\c\sae_fonctionnel\fonctionimage.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1670093028 source:c:\data\c\sae_fonctionnel\fonctionimage.c
+	"fonctionImage.h"
+
+1670100813 source:c:\users\nv062\desktop\sae_c_html\sae_fonctionnel\main.c
+	"fonctionImage.h"
+
+1670098911 c:\users\nv062\desktop\sae_c_html\sae_fonctionnel\fonctionimage.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1670101104 source:c:\users\nv062\desktop\sae_c_html\sae_fonctionnel\fonctionimage.c
+	"fonctionImage.h"
+
+1670100813 source:c:\users\nv062\desktop\sae_c_html\tout\sae_fonctionnel\main.c
+	"fonctionImage.h"
+
+1670098911 c:\users\nv062\desktop\sae_c_html\tout\sae_fonctionnel\fonctionimage.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1670102105 source:c:\users\thomb\documents\s1t-iut\r1.01\tout\sae_fonctionnel\main.c
+	"fonctionImage.h"
+
+1670102105 c:\users\thomb\documents\s1t-iut\r1.01\tout\sae_fonctionnel\fonctionimage.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1670104084 source:c:\users\thomb\documents\s1t-iut\r1.01\tout\sae_fonctionnel\fonctionimage.c
+	"fonctionImage.h"
+

@@ -1,0 +1,57 @@
+/*Animations*/
+ 
+@keyframes fileTransition {
+    0% {opacity: 0;}
+    50% {opacity: 0.5;}
+    100% {opacity: 1;}
+}
+
+@keyframes animationSuperflueMaisDrole {
+    0% {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
+}
+
+/* On met en forme l'ensemble du site dans sa globalité */
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    background: linear-gradient(rgb(2,2,6), rgb(0, 0, 99)) no-repeat;
+    font-family: 'Oswald', sans-serif;
+    color: grey;
+}
+
+/* Mise en forme de certaines balises */
+
+p{
+    text-align: center;
+}
+a{
+    color: grey;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+    color: rgb(29, 113, 209);
+}
+
+/* On met en forme le footer */
+
+footer{
+    align-self: center;
+    margin-top: 250px;
+
+    width: 300px;
+    height: 100px;
+
+    background-color: rgb(0, 0, 58);
+    border-radius: 500px 500px 0px 0px; /* Motif demi-cercle */
+}
+
+footer p{
+    position: relative;
+    margin-top: 50px;
+}

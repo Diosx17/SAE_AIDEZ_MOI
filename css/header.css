@@ -1,0 +1,44 @@
+/* On met en forme le header et les éléments qui le compose */
+
+header{
+    display: flex;
+
+    width: 250px;
+}
+
+header div{
+   display: flex;
+   flex-direction: column;
+
+   width: 250px;
+}
+
+header img{
+   position: relative;
+   left: 0;
+
+   width: 100px;
+   height: auto;
+}
+
+header h1{
+   flex-grow: 2;
+   align-self: center;
+   text-align: center;
+
+   cursor: help;
+}
+
+/*Easter eagg !! :) */
+header h1:active{
+   animation: animationSuperflueMaisDrole 0.1s infinite;
+}
+
+/* Mise forme */
+header h2{
+   text-align: center;
+
+   margin-top: -25px;
+
+   font-size: 15px;
+}

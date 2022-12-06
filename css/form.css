@@ -1,0 +1,36 @@
+/* On met en forme le fieldset, sa légende ainsi que le formulaire dans sa globalité */
+
+main{
+    text-align: center;
+    margin-top: 75px;
+}
+
+fieldset{
+    width: 350px;
+    height: auto;
+    margin-top: 100px;
+
+    border-radius: 10px;
+    border-color: rgb(37, 27, 189);
+    box-shadow: 10px 10px 10px rgb(4, 0, 255);
+}
+
+legend{
+    text-align: center;
+
+    padding: 0px 10px 0px 10px;
+
+    color: rgb(37, 27, 189);
+}
+
+/* On met en forme
+ * le formulaire
+ */
+
+form{
+    display: flex;
+    flex-direction: column;
+    
+    padding-bottom: 25px;
+}
+
